@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reuni Buka Bersama Soixantesik 2018</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+    /* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: slideOut 1s ease forwards 2s;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-logo {
+    width: 500px; /* Sesuaikan dengan ukuran gambar yang diinginkan */
+    height: auto;
+    margin-bottom: 0px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+            }
+            to {
+                text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+            }
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            display: none;
+            position: relative; /* To make sure the content is above particles */
+        }
+
+        body {
+            background: black;
+            color: white;
+            min-height: 100vh;
+            position: relative; /* Ensure the particles are below the content */
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+ /* Styling Modern untuk Countdown dengan warna transparan */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.1); /* Ubah ke transparan */
+    padding: 25px;
+    border-radius: 20px;
+    min-width: 150px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    animation: floatIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Efek border gradient yang bergerak */
+.countdown-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 25%, /* Ubah ke transparan */
+        transparent 50%
+    );
+    animation: rotate 4s linear infinite;
+}
+
+.countdown-item::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(0, 0, 0, 0.3); /* Ubah ke transparan */
+    border-radius: 18px;
+    z-index: 1;
+}
+
+/* Nilai Countdown */
+.countdown-value {
+    position: relative;
+    font-size: 3em;
+    font-weight: bold;
+    color: #00ffff; /* Ubah ke putih solid */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    z-index: 2;
+    animation: numberPulse 2s ease-in-out infinite;
+}
+
+/* Label Countdown */
+.countdown-label {
+    position: relative;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+/* Animasi tetap sama seperti sebelumnya */
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(30deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes numberPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Hover Effect dengan shadow transparan */
+.countdown-item:hover {
+    transform: translateZ(20px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+/* Delay berbeda untuk setiap item */
+.countdown-item:nth-child(1) { animation-delay: 0.1s; }
+.countdown-item:nth-child(2) { animation-delay: 0.3s; }
+.countdown-item:nth-child(3) { animation-delay: 0.5s; }
+.countdown-item:nth-child(4) { animation-delay: 0.7s; }
+
+/* Efek glitch saat hover */
+.countdown-item:hover .countdown-value {
+    animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+        /* Styling untuk container details dengan animasi */
+.details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.details:hover {
+    transform: translateY(-5px);
+}
+
+/* Animasi untuk heading */
+.details h2 {
+    color: #00ffff;
+    margin-bottom: 15px;
+    position: relative;
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+/* Styling untuk setiap item detail */
+.details p {
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Styling untuk list items */
+.details ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.details li {
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* Animation delay untuk setiap item */
+.details p:nth-child(2) { animation-delay: 0.2s; }
+.details p:nth-child(3) { animation-delay: 0.3s; }
+.details p:nth-child(4) { animation-delay: 0.4s; }
+.details p:nth-child(5) { animation-delay: 0.5s; }
+.details p:nth-child(6) { animation-delay: 0.6s; }
+
+.details li:nth-child(1) { animation-delay: 0.7s; }
+.details li:nth-child(2) { animation-delay: 0.8s; }
+.details li:nth-child(3) { animation-delay: 0.9s; }
+.details li:nth-child(4) { animation-delay: 1.0s; }
+.details li:nth-child(5) { animation-delay: 1.1s; }
+
+.details p:last-child {
+    animation-delay: 1.2s;
+    margin-top: 15px;
+}
+
+/* Hover effect pada list items */
+.details li:hover {
+    transform: translateX(5px);
+    color: #00ffff;
+    transition: all 0.3s ease;
+}
+
+/* Keyframes untuk animasi */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Tambahan efek hover untuk detail container */
+.details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.details:hover::before {
+    left: 100%;
+    transition: 0.5s;
+}
+
+        /* Button Container untuk Menyusun Tombol di Tengah */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Spasi antar tombol */
+            margin-top: 20px;
+        }
+
+        /* Gaya Umum untuk Tombol */
+        .rsvp-button, .btn-schedule {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: none; /* Pastikan border dihapus */
+            outline: none; /* Menghapus outline default pada elemen button */
+            -webkit-appearance: none; /* Menghilangkan styling default iOS */
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Gaya khusus untuk tombol saat diklik (focus) */
+        .rsvp-button:focus, .btn-schedule:focus {
+            outline: none; /* Menghapus outline jika tombol fokus */
+        }
+
+        /* Efek Hover untuk Tombol */
+        .rsvp-button:hover, .btn-schedule:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Modal (Contact Person & Susunan Acara) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: #112240;
+            padding: 30px;
+            border-radius: 10px;
+            width: 95%;
+            max-width: 500px;
+            position: relative;
+            text-align: center;
+            overflow-y: auto;
+            max-height: 80vh;
+            max-height: calc(100vh - 60px);
+        }
+
+        /* Custom Scrollbar untuk Modal */
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #1a1a3a; /* Warna latar belakang scrollbar */
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background-color: #00ffff; /* Warna penggeser scrollbar */
+            border-radius: 10px;
+            border: 3px solid #1a1a3a; /* Border di sekitar penggeser */
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background-color: #0088ff; /* Warna penggeser saat hover */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #64ffda;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .contact-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .contact-button {
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px; /* Memberikan padding lebih agar tombol lebih besar */
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+            margin-top: 10px; /* Memberikan jarak atas */
+            margin-bottom: 10px; /* Memberikan jarak bawah agar tidak terlalu mepet dengan tombol lain */
+            display: inline-block; /* Agar tombol berdampingan jika ada lebih dari satu */
+        }
+
+        .contact-item {
+            margin-bottom: 15px; /* Memberikan jarak antar item kontak */
+        }
+
+        .contact-button:hover {
+            background-color: #128c7e;
+        }
+
+        .close-contact {
+            background-color: #ff0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Styling for Susunan Acara Modal Close Button */
+        .close-schedule {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Particles.js container */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Make sure particles stay in the background */
+        }
+
+        /* Animasi untuk judul utama */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Animasi untuk subtitle */
+.slide-in {
+    animation: slideInFromRight 1s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animasi untuk text sekolah */
+.fade-up {
+    animation: fadeUp 1.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Particles.js container -->
+    <div id="particles-js"></div>
+
+   <!-- Loading Screen -->
+<div class="loading-screen">
+    <div class="loading-content">
+        <!-- Ganti "path/to/your/image.png" dengan path gambar Anda -->
+        <img src="66666.png" alt="Logo SMPN 66" class="loading-logo animate__animated animate__fadeIn">
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <header data-aos="fade-down">
+                <h1 class="floating">Reuni Buka Bersama</h1>
+                <h2 class="slide-in">Soixantesix 2018</h2>
+                <p class="fade-up">SMPN 66 Jakarta</p>
+            </header>
+
+            <div class="countdown" data-aos="fade-up">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Hari</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Jam</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Menit</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Detik</div>
+                </div>
+            </div>
+
+           <div class="details" data-aos="fade-up">
+    <h2>Detail Acara</h2>
+    <p>🗓️ Minggu, 16 Maret 2025</p>
+    <p>⏰ 16:00 WIB - Selesai</p>
+    <p>📍 Aula SMPN 66 Jakarta</p>
+    <p>👥 Seluruh Alumni Angkatan 2018</p>
+    <p>💰 Htm 150.000</p>
+    <p>Include:</p>
+    <ul style="list-style: none; padding-left: 20px;">
+        <li>🍱 Snack box</li>
+        <li>🍛 Nasi box</li>
+        <li>🍪 Prasmanan makanan ringan</li>
+        <li>🎁 Santunan</li>
+        <li>🎀 Bingkisan untuk guru</li>
+    </ul>
+    <br>
+   <p>✨ Bukan ajang adu outfit, tapi ajang untuk 🤝 mempererat silaturahmi biar makin solid! 💪</p>
+</div>
+
+                <div class="button-container">
+                    <button class="btn-schedule" onclick="showSchedule()">Lihat Susunan Acara</button>
+                    <a href="javascript:void(0);" class="rsvp-button" data-aos="zoom-in" onclick="showContactPerson()">Contact Person</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Susunan Acara -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <button class="close-schedule" onclick="closeSchedule()">X</button>
+            <h2>Susunan Acara</h2>
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                <tr>
+                    <th style="padding: 34px; border-bottom: 1px solid #64ffda;">Waktu</th>
+                    <th style="padding: 28px; border-bottom: 1px solid #64ffda;">Agenda</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:00-16:10</td>
+                    <td style="padding: 10px;">Pembukaan Acara</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:10-16:15</td>
+                    <td style="padding: 10px;">Sambutan dari ketua pelaksana</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:15-16:25</td>
+                    <td style="padding: 10px;">Sambutan dari perwakilan guru</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:25-16:30</td>
+                    <td style="padding: 10px;">Sambutan dari Korlas</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:30-16:45</td>
+                    <td style="padding: 10px;">Pemberian bingkisan kepada Guru-Guru</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:45-16:50</td>
+                    <td style="padding: 10px;">Sambutan dari orang tua alm. Ragas</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:50-16:55</td>
+                    <td style="padding: 10px;">Sambutan dari orang tua alm. Dimas</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">16:55-17:10</td>
+                    <td style="padding: 10px;">Santunan anak yatim</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">17:10-17:40</td>
+                    <td style="padding: 10px;">Ceramah</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">17:40-18:00</td>
+                    <td style="padding: 10px;">Tahlil</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">18:00-18:10</td>
+                    <td style="padding: 10px;">Membantalkan Puasa</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">18:10-18:25</td>
+                    <td style="padding: 10px;">Sholat Magrib Berjamaah</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">18:25-Selesai</td>
+                    <td style="padding: 10px;">Menikmati sajian yang telah disediakan & pemuataran nostalgia semasa sekolah</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Contact Person -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeContact()">&times;</button>
+            <h2>Contact Person</h2>
+            <div class="contact-item">
+                <span>Diva (91)</span>
+                <a href="https://wa.me/+6285173210571" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
+            </div>
+            <div class="contact-item">
+                <span>Eka (92)</span>
+                <a href="https://wa.me/+6289636907196" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
+            </div>
+            <div class="contact-item">
+                <span>Danu (93)</span>
+                <a href="https://wa.me/+6281291102899" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
+            </div>
+            <div class="contact-item">
+                <span>Rika (94)</span>
+                <a href="https://wa.me/+6282112738853" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
+            </div>
+            <div class="contact-item">
+                <span>Alifah (95)</span>
+                <a href="https://wa.me/+6285776182639" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        // Loading screen
+        setTimeout(() => {
+            document.querySelector('.loading-screen').style.opacity = '0';
+            document.querySelector('.loading-screen').style.transition = 'opacity 1s ease';
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'block';
+            }, 1000);
+        }, 2500);
+
+        // Countdown Timer
+        const eventDate = new Date('March 16, 2025 16:00:00').getTime();
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+
+        // Initialize AOS
+        AOS.init();
+
+        // Particles.js setup
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#00ffff"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 4,
+                        size_min: 0.3,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Show modals
+        function showSchedule() {
+            document.getElementById('scheduleModal').style.display = 'flex';
+        }
+
+        function closeSchedule() {
+            document.getElementById('scheduleModal').style.display = 'none';
+        }
+
+        function showContactPerson() {
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+
+        function closeContact() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
