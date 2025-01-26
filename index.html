@@ -377,24 +377,30 @@
             margin-top: 20px;
         }
 
-        /* Gaya Umum untuk Tombol */
         .rsvp-button, .btn-schedule {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #00ffff, #0088ff);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            border: none; /* Pastikan border dihapus */
-            outline: none; /* Menghapus outline default pada elemen button */
-            -webkit-appearance: none; /* Menghilangkan styling default iOS */
-            -moz-appearance: none;
-            appearance: none;
-        }
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(45deg, #00ffff, #0088ff);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border: none;
+    outline: none;
+    cursor: pointer; /* Added cursor pointer for better interaction */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Ensure the button is visible */
+.rsvp-button {
+    opacity: 1;
+    visibility: visible;
+}
 
         /* Gaya khusus untuk tombol saat diklik (focus) */
         .rsvp-button:focus, .btn-schedule:focus {
