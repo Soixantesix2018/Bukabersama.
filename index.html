@@ -6,6 +6,7 @@
     <title>Reuni Buka Bersama Soixantesik 2018</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -103,21 +104,22 @@
         }
 
  /* Styling Modern untuk Countdown dengan warna transparan */
+/* Base styles for countdown */
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin: 40px 0;
+    gap: 15px; /* Reduced from 25px */
+    margin: 30px 0; /* Reduced from 40px */
     flex-wrap: wrap;
     perspective: 1000px;
 }
 
 .countdown-item {
-    background: rgba(255, 255, 255, 0.1); /* Ubah ke transparan */
-    padding: 25px;
-    border-radius: 30px;
-    width: 120px;
-    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px; /* Reduced from 25px */
+    border-radius: 20px; /* Reduced from 30px */
+    width: 90px; /* Reduced from 120px */
+    height: 90px; /* Reduced from 120px */
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -125,53 +127,115 @@
     animation: floatIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-/* Efek border gradient yang bergerak */
-.countdown-item::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.1) 25%, /* Ubah ke transparan */
-        transparent 50%
-    );
-    animation: rotate 4s linear infinite;
-}
-
-.countdown-item::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: rgba(0, 0, 0, 0.3); /* Ubah ke transparan */
-    border-radius: 18px;
-    z-index: 1;
-}
-
-/* Nilai Countdown */
 .countdown-value {
     position: relative;
-    font-size: 2em;
+    font-size: 1.8em; /* Reduced from 2em */
     font-weight: bold;
-    color: #00ffff; /* Ubah ke putih solid */
+    color: #00ffff;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     z-index: 2;
-    animation: numberPulse 2s ease-in-out infinite;
 }
 
-/* Label Countdown */
 .countdown-label {
     position: relative;
-    margin-top: 10px;
+    margin-top: 8px; /* Reduced from 10px */
     color: #fff;
-    font-size: 1.1em;
-    letter-spacing: 2px;
+    font-size: 0.9em; /* Reduced from 1.1em */
+    letter-spacing: 1px; /* Reduced from 2px */
     text-transform: uppercase;
     opacity: 0.8;
     z-index: 2;
+}
+
+/* Large screens (desktop) */
+@media screen and (min-width: 1200px) {
+    .countdown {
+        gap: 20px; /* Reduced from 30px */
+    }
+    
+    .countdown-item {
+        width: 100px; /* Reduced from 140px */
+        height: 100px; /* Reduced from 140px */
+        padding: 20px; /* Reduced from 30px */
+    }
+    
+    .countdown-value {
+        font-size: 2em; /* Reduced from 2.5em */
+    }
+    
+    .countdown-label {
+        font-size: 1em; /* Reduced from 1.2em */
+    }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 768px) {
+    .countdown {
+        gap: 15px; /* Reduced from 20px */
+    }
+    
+    .countdown-item {
+        width: 80px; /* Reduced from 100px */
+        height: 80px; /* Reduced from 100px */
+        padding: 15px; /* Reduced from 20px */
+    }
+    
+    .countdown-value {
+        font-size: 1.5em; /* Reduced from 1.8em */
+    }
+    
+    .countdown-label {
+        font-size: 0.8em; /* Reduced from 0.9em */
+        margin-top: 5px; /* Reduced from 8px */
+    }
+}
+
+/* Small screens (mobile landscape) */
+@media screen and (max-width: 576px) {
+    .countdown {
+        gap: 10px; /* Reduced from 15px */
+    }
+    
+    .countdown-item {
+        width: 65px; /* Reduced from 85px */
+        height: 65px; /* Reduced from 85px */
+        padding: 10px; /* Reduced from 15px */
+        border-radius: 15px; /* Reduced from 20px */
+    }
+    
+    .countdown-value {
+        font-size: 1.3em; /* Reduced from 1.5em */
+    }
+    
+    .countdown-label {
+        font-size: 0.7em; /* Reduced from 0.8em */
+        margin-top: 4px; /* Reduced from 5px */
+        letter-spacing: 0.5px;
+    }
+}
+
+/* Extra small screens (mobile portrait) */
+@media screen and (max-width: 375px) {
+    .countdown {
+        gap: 8px; /* Reduced from 10px */
+    }
+    
+    .countdown-item {
+        width: 55px; /* Reduced from 70px */
+        height: 55px; /* Reduced from 70px */
+        padding: 8px; /* Reduced from 10px */
+        border-radius: 12px; /* Reduced from 15px */
+    }
+    
+    .countdown-value {
+        font-size: 1.1em; /* Reduced from 1.3em */
+    }
+    
+    .countdown-label {
+        font-size: 0.6em; /* Reduced from 0.7em */
+        margin-top: 2px; /* Reduced from 3px */
+        letter-spacing: 0.3px; /* Reduced from 0.5px */
+    }
 }
 
 /* Animasi tetap sama seperti sebelumnya */
@@ -371,18 +435,16 @@
 .button-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     max-width: 500px;
     margin: 30px auto;
     padding: 15px;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Base button styles - unified for all buttons */
-.uniform-button,
-.contact-button,
-.rsvp-button,
-.btn-schedule {
+/* Base button styles */
+.uniform-button {
     width: 100%;
     height: 50px;
     background: linear-gradient(45deg, #00ffff, #0088ff);
@@ -402,49 +464,12 @@
     box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
 }
 
-/* Unified hover effect for all buttons */
-.uniform-button:hover,
-.contact-button:hover,
-.rsvp-button:hover,
-.btn-schedule:hover {
-    transform: translateY(-3px);
-    background: linear-gradient(45deg, #0088ff, #00ffff);
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
-}
-
-/* Unified active/focus states */
-.uniform-button:active,
-.contact-button:active,
-.rsvp-button:active,
-.btn-schedule:active,
-.uniform-button:focus,
-.contact-button:focus,
-.rsvp-button:focus,
-.btn-schedule:focus {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 255, 255, 0.3);
-    outline: none;
-}
-
-/* Modal buttons specific adjustments */
-.modal .contact-button {
-    margin: 10px 0;
-    width: auto;
-    min-width: 200px;
-}
-
-/* Responsive Design */
+/* Responsive Breakpoints */
 @media screen and (min-width: 1024px) {
     .button-container {
         grid-template-columns: repeat(2, 180px);
         gap: 25px;
-    }
-
-    .uniform-button,
-    .contact-button,
-    .rsvp-button,
-    .btn-schedule {
-        font-size: 16px;
+        margin: 30px auto;
     }
 }
 
@@ -453,12 +478,10 @@
         grid-template-columns: repeat(2, 160px);
         gap: 20px;
         padding: 10px;
+        margin: 20px auto;
     }
 
-    .uniform-button,
-    .contact-button,
-    .rsvp-button,
-    .btn-schedule {
+    .uniform-button {
         font-size: 14px;
         height: 45px;
         padding: 0 15px;
@@ -470,12 +493,10 @@
         grid-template-columns: repeat(2, 140px);
         gap: 15px;
         padding: 8px;
+        margin: 15px auto;
     }
 
-    .uniform-button,
-    .contact-button,
-    .rsvp-button,
-    .btn-schedule {
+    .uniform-button {
         font-size: 13px;
         height: 40px;
         padding: 0 12px;
@@ -488,23 +509,13 @@
         grid-template-columns: repeat(2, 120px);
         gap: 10px;
         padding: 5px;
+        margin: 10px auto;
     }
 
-    .uniform-button,
-    .contact-button,
-    .rsvp-button,
-    .btn-schedule {
+    .uniform-button {
         font-size: 12px;
         height: 38px;
         padding: 0 10px;
-    }
-}
-
-/* Modal Specific Responsive Adjustments */
-@media screen and (max-width: 480px) {
-    .modal .contact-button {
-        min-width: 100px;
-        font-size: 15px;
     }
 }
 
@@ -535,7 +546,6 @@
 
         .modal-content {
             background: #112240;
-            padding: 30px;
             border-radius: 10px;
             width: 95%;
             max-width: 500px;
@@ -685,7 +695,119 @@
     }
 }
 
+/* Styling untuk tabel susunan acara */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
+/* Header tabel */
+.schedule-table th {
+    background: rgba(100, 255, 218, 0.1);
+    color: #64ffda;
+    padding: 20px 25px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.2em;
+    border-bottom: 2px solid #64ffda;
+}
+
+/* Sel tabel dalam tbody */
+.schedule-table tbody td {
+    padding: 18px 25px;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+    font-size: 0.7em;
+    line-height: 1.5;
+}
+
+/* Kolom waktu */
+.schedule-table tbody td:first-child {
+    width: 150px;
+    color: #00ffff;
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+/* Kolom agenda */
+.schedule-table tbody td:last-child {
+    font-size: 0.8em;
+}
+
+/* Styling baris */
+.schedule-table tbody tr:hover {
+    background: rgba(100, 255, 218, 0.05);
+}
+
+/* Baris terakhir */
+.schedule-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .schedule-table th {
+        padding: 15px 20px;
+        font-size: 1.1em;
+    }
+
+    .schedule-table tbody td {
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+
+    .schedule-table tbody td:first-child {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .schedule-table th {
+        padding: 12px 15px;
+        font-size: 0.7em;
+    }
+
+    .schedule-table tbody td {
+        padding: 12px 15px;
+        font-size: 0.65em;
+    }
+
+    .schedule-table tbody td:first-child {
+        width: 110px;
+    }
+}
+
+/* Dark mode optimization */
+@media (prefers-color-scheme: dark) {
+    .schedule-table tbody td {
+        color: #ffffff;
+    }
+}
+.schedule-table i {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.schedule-table tr:hover i {
+    transform: scale(1.2);
+}
+
+/* Responsive design untuk ikon */
+@media screen and (max-width: 768px) {
+    .schedule-table i {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .schedule-table i {
+        font-size: 0.8em;
+    }
+}
     </style>
 </head>
 <body>
@@ -754,63 +876,68 @@
             <button class="close-schedule" onclick="closeSchedule()">X</button>
             <h2>Susunan Acara</h2>
             <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
-                <tr>
-                    <th style="padding: 34px; border-bottom: 1px solid #64ffda;">Waktu</th>
-                    <th style="padding: 28px; border-bottom: 1px solid #64ffda;">Agenda</th>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:00-16:10</td>
-                    <td style="padding: 10px;">Pembukaan Acara</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:10-16:15</td>
-                    <td style="padding: 10px;">Sambutan dari ketua pelaksana</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:15-16:25</td>
-                    <td style="padding: 10px;">Sambutan dari perwakilan guru</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:25-16:30</td>
-                    <td style="padding: 10px;">Sambutan dari Korlas</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:30-16:45</td>
-                    <td style="padding: 10px;">Pemberian bingkisan kepada Guru-Guru</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:45-16:50</td>
-                    <td style="padding: 10px;">Sambutan dari orang tua alm. Ragas</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:50-16:55</td>
-                    <td style="padding: 10px;">Sambutan dari orang tua alm. Dimas</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">16:55-17:10</td>
-                    <td style="padding: 10px;">Santunan anak yatim</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">17:10-17:40</td>
-                    <td style="padding: 10px;">Ceramah</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">17:40-18:00</td>
-                    <td style="padding: 10px;">Tahlil</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">18:00-18:10</td>
-                    <td style="padding: 10px;">Membantalkan Puasa</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">18:10-18:25</td>
-                    <td style="padding: 10px;">Sholat Magrib Berjamaah</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px;">18:25-Selesai</td>
-                    <td style="padding: 10px;">Menikmati sajian yang telah disediakan & pemuataran nostalgia semasa sekolah</td>
-                </tr>
-            </table>
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Agenda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>16:00-16:10</td>
+                                <td><i class="fas fa-microphone"></i> Pembukaan Acara</td>
+                            </tr>
+                            <tr>
+                                <td>16:10-16:15</td>
+                                <td><i class="fas fa-user-tie"></i> Sambutan dari ketua pelaksana</td>
+                            </tr>
+                            <tr>
+                                <td>16:15-16:25</td>
+                                <td><i class="fas fa-chalkboard-teacher"></i> Sambutan dari perwakilan guru</td>
+                            </tr>
+                            <tr>
+                                <td>16:25-16:30</td>
+                                <td><i class="fas fa-user-friends"></i> Sambutan dari Korlas</td>
+                            </tr>
+                            <tr>
+                                <td>16:30-16:45</td>
+                                <td><i class="fas fa-gift"></i> Pemberian bingkisan kepada Guru-Guru</td>
+                            </tr>
+                            <tr>
+                                <td>16:45-16:50</td>
+                                <td><i class="fas fa-dove"></i> Sambutan dari orang tua alm. Ragas</td>
+                            </tr>
+                            <tr>
+                                <td>16:50-16:55</td>
+                                <td><i class="fas fa-dove"></i> Sambutan dari orang tua alm. Dimas</td>
+                            </tr>
+                            <tr>
+                                <td>16:55-17:10</td>
+                                <td><i class="fas fa-hand-holding-heart"></i> Santunan anak yatim</td>
+                            </tr>
+                            <tr>
+                                <td>17:10-17:40</td>
+                                <td><i class="fas fa-book-reader"></i> Ceramah</td>
+                            </tr>
+                            <tr>
+                                <td>17:40-18:00</td>
+                                <td><i class="fas fa-pray"></i> Tahlil</td>
+                            </tr>
+                            <tr>
+                                <td>18:00-18:10</td>
+                                <td><i class="fas fa-utensils"></i> Membantalkan Puasa</td>
+                            </tr>
+                            <tr>
+                                <td>18:10-18:25</td>
+                                <td><i class="fas fa-mosque"></i> Sholat Magrib Berjamaah</td>
+                            </tr>
+                            <tr>
+                                <td>18:25-Selesai</td>
+                                <td><i class="fas fa-photo-video"></i> Menikmati sajian & pemutaran nostalgia semasa sekolah</td>
+                            </tr>
+                        </tbody>
+                    </table>
         </div>
     </div>
 
