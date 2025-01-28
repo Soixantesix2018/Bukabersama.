@@ -125,304 +125,127 @@
             font-weight: bold;
         }
 
-        .rank-1 {
-            color: gold;
+        .rank-1 { color: gold; }
+        .rank-2 { color: silver; }
+        .rank-3 { color: #cd7f32; }
+
+       
+    .action-buttons {
+        position: static; /* Changed from fixed */
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+        z-index: 1000;
+    }
+
+    .donate-now-btn, .contact-btn {
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .donate-now-btn:hover, .contact-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .buttons-container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 30px;
+        backdrop-filter: blur(10px);
+    }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
         }
 
-        .rank-2 {
-            color: silver;
+        .modal-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            color: white;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .rank-3 {
-            color: #cd7f32; /* bronze */
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #00ffff;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
-        /* Responsif untuk perangkat mobile */
+        .bank-info {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .bank-info h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .copy-button {
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .donation-table {
-                overflow-x: auto;
-            }
-
-            .donation-table td, 
-            .donation-table th {
-                padding: 10px;
-            }
+        .container { padding: 10px; }
+        .donation-table { overflow-x: auto; }
+        .donation-table td, 
+        .donation-table th { padding: 10px; }
+        .action-buttons {
+            flex-direction: column;
+            align-items: center;
         }
-          /* Previous styles remain the same */
-
-    /* New styles for donation button and modal */
-    .donate-now-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        padding: 15px 30px;
-        background: linear-gradient(45deg, #00ffff, #0088ff);
-        color: white;
-        text-decoration: none;
-        border-radius: 30px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    .donate-now-btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1001;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal-content {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 30px;
-        border-radius: 20px;
-        position: relative;
-        width: 90%;
-        max-width: 500px;
-        color: white;
-        border: 1px solid rgba(0, 255, 255, 0.2);
-    }
-
-    .close-modal {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 24px;
-        color: #00ffff;
-        cursor: pointer;
-        background: none;
-        border: none;
-    }
-
-    .bank-info {
-        margin: 20px 0;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .bank-info h3 {
-        color: #00ffff;
-        margin-bottom: 15px;
-    }
-
-    .copy-button {
-        background: linear-gradient(45deg, #00ffff, #0088ff);
-        border: none;
-        padding: 8px 15px;
-        border-radius: 15px;
-        color: white;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: all 0.3s ease;
-    }
-
-    .copy-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-    }
-
-    .qr-code {
-        width: 150px;
-        height: 150px;
-        background: white;
-        margin: 20px auto;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    @media (max-width: 768px) {
-        .donate-now-btn {
-            bottom: 20px;
-            right: 20px;
+        .donate-now-btn,
+        .contact-btn {
             padding: 12px 25px;
-        }
-    }
-</style>
-
-<!-- Add this button before closing body tag -->
-<button class="donate-now-btn" onclick="showDonationModal()">💝 Ikut Mendonasi</button>
-
-<!-- Add this modal markup before closing body tag -->
-<div id="donationModal" class="modal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="closeDonationModal()">&times;</button>
-        <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">Informasi Rekening Donasi</h2>
-        
-        <div class="bank-info">
-            <h3>BCA Digital</h3>
-            <p>Nomor Rekening:</p>
-            <p style="font-size: 24px; margin: 10px 0; color: #00ffff;">1234567890</p>
-            <button class="copy-button" onclick="copyToClipboard('1234567890')">
-                Salin Nomor Rekening
-            </button>
-            <p style="margin-top: 15px;">Atas Nama: Salsabila Puspita sar</p>
-        </div>
-
-        <p style="text-align: center; margin-top: 20px;">
-            Setelah melakukan transfer, mohon konfirmasi dengan mengirimkan bukti transfer
-            ke contact person yang tertera di halaman utama.
-        </p>    
-    </div>
-</div>
-
-<!-- Add this script before closing body tag -->
-<script>
-    // Previous scripts remain the same
-
-    function showDonationModal() {
-        document.getElementById('donationModal').style.display = 'flex';
-    }
-
-    function closeDonationModal() {
-        document.getElementById('donationModal').style.display = 'none';
-    }
-
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Nomor rekening berhasil disalin!');
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        const modal = document.getElementById('donationModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="id">
-<!-- Previous head content remains the same until style tag -->
-<style>
-    /* Previous styles remain the same */
-
-    /* New styles for donation button and modal */
-    .donate-now-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        padding: 15px 30px;
-        background: linear-gradient(45deg, #00ffff, #0088ff);
-        color: white;
-        text-decoration: none;
-        border-radius: 30px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        transition: all 0.3s ease;
-        z-index: 1000;
-    }
-
-    .donate-now-btn:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1001;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal-content {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 30px;
-        border-radius: 20px;
-        position: relative;
-        width: 90%;
-        max-width: 500px;
-        color: white;
-        border: 1px solid rgba(0, 255, 255, 0.2);
-    }
-
-    .close-modal {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 24px;
-        color: #00ffff;
-        cursor: pointer;
-        background: none;
-        border: none;
-    }
-
-    .bank-info {
-        margin: 20px 0;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .bank-info h3 {
-        color: #00ffff;
-        margin-bottom: 15px;
-    }
-
-    .copy-button {
-        background: linear-gradient(45deg, #00ffff, #0088ff);
-        border: none;
-        padding: 8px 15px;
-        border-radius: 15px;
-        color: white;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: all 0.3s ease;
-    }
-
-    .copy-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-    }
-
-    .qr-code {
-        width: 150px;
-        height: 150px;
-        background: white;
-        margin: 20px auto;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    @media (max-width: 768px) {
-        .donate-now-btn {
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 25px;
+            width: 100%;
+            justify-content: center;
         }
     }
     </style>
@@ -432,10 +255,11 @@
     <a href="index.html" class="back-button">← Kembali</a>
 
     <div class="container">
-        <header data-aos="fade-down">
-            <h1>Daftar Donasi</h1>
-            <p>Terima kasih atas kontribusi Anda</p>
-        </header>
+        <div class="container">
+            <header data-aos="fade-down">
+                <h1>Daftar Donasi</h1>
+                <p>Terima kasih atas kontribusi Anda</p>
+            </header>
 
         <div class="donation-table" data-aos="fade-up">
             <table>
@@ -494,29 +318,36 @@
         </div>
     </div>
 
-    <!-- Add this button before closing body tag -->
-<button class="donate-now-btn" onclick="showDonationModal()">💝 Ikut Mendonasi</button>
-
-<!-- Add this modal markup before closing body tag -->
-<div id="donationModal" class="modal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="closeDonationModal()">&times;</button>
-        <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">Informasi Rekening Donasi</h2>
-        
-        <div class="bank-info">
-            <h3>BCA Digital</h3>
-
-            <p>Nomor Rekening:</p>
-            <p style="font-size: 24px; margin: 10px 0; color: #00ffff;">1234567890</p>
-            <button class="copy-button" onclick="copyToClipboard('1234567890')">
-                Salin Nomor Rekening
-            </button>
-            <p style="margin-top: 15px;">Atas Nama:Salsabila Puspita sari</p>
-        </div>
-
-        <button class=>Ikut Mendonasi</button>
+    <div class="action-buttons" data-aos="fade-up">
+        <button class="contact-btn" onclick="contactTreasurer()">
+            💬 Hubungi Bendahara
+        </button>
+        <button class="donate-now-btn" onclick="showDonationModal()">
+            💝 Ikut Mendonasi
+        </button>
     </div>
 </div>
+
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeDonationModal()">&times;</button>
+            <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">Informasi Rekening Donasi</h2>
+            
+            <div class="bank-info">
+                <h3>BCA Digital</h3>
+                <p>Nomor Rekening:</p>
+                <p style="font-size: 24px; margin: 10px 0; color: #00ffff;">2480627370</p>
+                <button class="copy-button" onclick="copyToClipboard('2480627370')">
+                    Salin Nomor Rekening
+                </button>
+                <p style="margin-top: 15px;">Atas Nama: Salsabila Puspita sari</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px;">
+                Setelah melakukan transfer, mohon konfirmasi dengan menghubungi bendahara melalui tombol WhatsApp.
+            </p>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
@@ -566,28 +397,33 @@
         });
 
         function showDonationModal() {
-        document.getElementById('donationModal').style.display = 'flex';
-    }
-
-    function closeDonationModal() {
-        document.getElementById('donationModal').style.display = 'none';
-    }
-
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Nomor rekening berhasil disalin!');
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        const modal = document.getElementById('donationModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
+            document.getElementById('donationModal').style.display = 'flex';
         }
-    }
+
+        function closeDonationModal() {
+            document.getElementById('donationModal').style.display = 'none';
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Nomor rekening berhasil disalin!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        function contactTreasurer() {
+            // Replace the phone number with the actual treasurer's number
+            window.open('https://wa.me/62895358973819?text=Halo, saya ingin konfirmasi donasi untuk Reuni Soixantesix 2018.', '_blank');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('donationModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
