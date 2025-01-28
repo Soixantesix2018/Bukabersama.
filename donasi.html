@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Donasi - Reuni Soixantesix 2018</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: black;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #00ffff;
+            text-decoration: none;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .donation-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .donation-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .donation-table th {
+            background: rgba(0, 255, 255, 0.2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .donation-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .donation-table tr:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .donation-amount {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .total-donations {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: right;
+            backdrop-filter: blur(10px);
+        }
+
+        .total-amount {
+            color: #00ffff;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .rank {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .rank-1 {
+            color: gold;
+        }
+
+        .rank-2 {
+            color: silver;
+        }
+
+        .rank-3 {
+            color: #cd7f32; /* bronze */
+        }
+
+        /* Responsif untuk perangkat mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .donation-table {
+                overflow-x: auto;
+            }
+
+            .donation-table td, 
+            .donation-table th {
+                padding: 10px;
+            }
+        }
+          /* Previous styles remain the same */
+
+    /* New styles for donation button and modal */
+    .donate-now-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .donate-now-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 20px;
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        color: white;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        color: #00ffff;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    .bank-info {
+        margin: 20px 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .bank-info h3 {
+        color: #00ffff;
+        margin-bottom: 15px;
+    }
+
+    .copy-button {
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        border: none;
+        padding: 8px 15px;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .copy-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .qr-code {
+        width: 150px;
+        height: 150px;
+        background: white;
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .donate-now-btn {
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 25px;
+        }
+    }
+</style>
+
+<!-- Add this button before closing body tag -->
+<button class="donate-now-btn" onclick="showDonationModal()">💝 Ikut Mendonasi</button>
+
+<!-- Add this modal markup before closing body tag -->
+<div id="donationModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeDonationModal()">&times;</button>
+        <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">Informasi Rekening Donasi</h2>
+        
+        <div class="bank-info">
+            <h3>BCA Digital</h3>
+            <p>Nomor Rekening:</p>
+            <p style="font-size: 24px; margin: 10px 0; color: #00ffff;">1234567890</p>
+            <button class="copy-button" onclick="copyToClipboard('1234567890')">
+                Salin Nomor Rekening
+            </button>
+            <p style="margin-top: 15px;">Atas Nama: Salsabila Puspita sar</p>
+        </div>
+
+        <p style="text-align: center; margin-top: 20px;">
+            Setelah melakukan transfer, mohon konfirmasi dengan mengirimkan bukti transfer
+            ke contact person yang tertera di halaman utama.
+        </p>    
+    </div>
+</div>
+
+<!-- Add this script before closing body tag -->
+<script>
+    // Previous scripts remain the same
+
+    function showDonationModal() {
+        document.getElementById('donationModal').style.display = 'flex';
+    }
+
+    function closeDonationModal() {
+        document.getElementById('donationModal').style.display = 'none';
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Nomor rekening berhasil disalin!');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('donationModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<!-- Previous head content remains the same until style tag -->
+<style>
+    /* Previous styles remain the same */
+
+    /* New styles for donation button and modal */
+    .donate-now-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .donate-now-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 20px;
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        color: white;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        color: #00ffff;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    .bank-info {
+        margin: 20px 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .bank-info h3 {
+        color: #00ffff;
+        margin-bottom: 15px;
+    }
+
+    .copy-button {
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        border: none;
+        padding: 8px 15px;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .copy-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .qr-code {
+        width: 150px;
+        height: 150px;
+        background: white;
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .donate-now-btn {
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 25px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <a href="index.html" class="back-button">← Kembali</a>
+
+    <div class="container">
+        <header data-aos="fade-down">
+            <h1>Daftar Donasi</h1>
+            <p>Terima kasih atas kontribusi Anda</p>
+        </header>
+
+        <div class="donation-table" data-aos="fade-up">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Nominal</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank rank-1">1</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="donation-amount">-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="rank rank-2">2</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="donation-amount">-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="rank rank-3">3</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="donation-amount">-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">4</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="donation-amount">-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="rank">5</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="donation-amount">-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="total-donations" data-aos="fade-up">
+            <p>Total Donasi Terkumpul:</p>
+            <span class="total-amount">Rp 2.850.000</span>
+        </div>
+    </div>
+
+    <!-- Add this button before closing body tag -->
+<button class="donate-now-btn" onclick="showDonationModal()">💝 Ikut Mendonasi</button>
+
+<!-- Add this modal markup before closing body tag -->
+<div id="donationModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeDonationModal()">&times;</button>
+        <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">Informasi Rekening Donasi</h2>
+        
+        <div class="bank-info">
+            <h3>BCA Digital</h3>
+
+            <p>Nomor Rekening:</p>
+            <p style="font-size: 24px; margin: 10px 0; color: #00ffff;">1234567890</p>
+            <button class="copy-button" onclick="copyToClipboard('1234567890')">
+                Salin Nomor Rekening
+            </button>
+            <p style="margin-top: 15px;">Atas Nama:Salsabila Puspita sari</p>
+        </div>
+
+        <button class=>Ikut Mendonasi</button>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        AOS.init();
+
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ffff" },
+                shape: { type: "circle" },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: { enable: true, speed: 4, size_min: 0.3, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            },
+            retina_detect: true
+        });
+
+        function showDonationModal() {
+        document.getElementById('donationModal').style.display = 'flex';
+    }
+
+    function closeDonationModal() {
+        document.getElementById('donationModal').style.display = 'none';
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Nomor rekening berhasil disalin!');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('donationModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+    </script>
+</body>
+</html>
