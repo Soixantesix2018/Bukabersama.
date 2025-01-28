@@ -588,6 +588,41 @@
         opacity: 1;
     }
 }
+
+/* Update button-container to handle three buttons */
+.button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Reduced gap for three buttons */
+        margin-top: 20px;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    }
+
+    /* Update existing button styles to be consistent */
+    .rsvp-button, .btn-schedule {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(45deg, #00ffff, #0088ff);
+        color: white;
+        text-decoration: none;
+        border-radius: 40px;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        min-width: 140px; /* Ensure consistent button width */
+    }
+
+    /* Enhance hover effect */
+    .rsvp-button:hover, .btn-schedule:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        background: linear-gradient(45deg, #0088ff, #00ffff);
+    }
     </style>
 </head>
 <body>
@@ -716,10 +751,7 @@
         </div>
     </div>
 
-    <div class="button-container">
-        <button class="btn-schedule" onclick="showSchedule()">Lihat Susunan Acara</button>
-        <a href="javascript:void(0);" class="rsvp-button" data-aos="zoom-in" onclick="showContactPerson()">Contact Person</a>
-    </div>
+  
     <!-- Modal Contact Person -->
     <div class="modal" id="contactModal">
         <div class="modal-content">
@@ -746,6 +778,13 @@
                 <a href="https://wa.me/+6285776182639" class="contact-button" target="_blank">Hubungi via WhatsApp</a>
             </div>
         </div>
+    </div>
+
+    <div class="button-container">         
+        <button class="btn-schedule" onclick="showSchedule()">📅 Lihat Susunan Acara</button>         
+        <a href="javascript:void(0);" class="rsvp-button" data-aos="zoom-in" onclick="showContactPerson()">👥 Contact Person</a>         
+        <a href="donasi.html" class="rsvp-button" data-aos="zoom-in">💝 Donasi</a>         
+        <a href="daftar peserta.html" class="rsvp-button" data-aos="zoom-in">📋 Daftar Peserta</a>     
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
