@@ -368,32 +368,101 @@
     transition: 0.5s;
 }
 
-        /* Button Container untuk Menyusun Tombol di Tengah */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* Spasi antar tombol */
-            margin-top: 20px;
-        }
+/* Update button-container to create a 2x2 grid */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 50px)); /* Creates 2 columns */
+    grid-gap: 15px; /* Space between buttons */
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    position: relative;
+    z-index: 10;
+    max-width: 450px; /* Limit container width for better layout */
+}
 
-        .rsvp-button, .btn-schedule {
-    display: inline-block;
-    padding: 10px 20px;
+/* Updated button container for 2x2 grid */
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2,180px);
+    grid-template-rows: repeat(2,50px);
+    grid-gap: 25px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Unified button style */
+.uniform-button {
+    width: 100%;
+    height: 100%;
     background: linear-gradient(45deg, #00ffff, #0088ff);
     color: white;
-    text-decoration: none;
-    border-radius: 40px;
-    font-weight: bold ;
-    margin-top: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
     border: none;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    z-index: 10;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Hover effect for all buttons */
+.uniform-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+    background: linear-gradient(45deg, #0088ff, #00ffff);
+}
+
+/* Focus state for better accessibility */
+.uniform-button:focus {
     outline: none;
-    cursor: pointer; /* Added cursor pointer for better interaction */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.5);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 400px) {
+    .button-container {
+        grid-template-columns: 10px;
+        grid-template-rows: repeat(4, 130px);
+    }
+}
+
+/* Enhance hover effect while maintaining visibility */
+.rsvp-button:hover, .btn-schedule:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+    background: linear-gradient(45deg, #0088ff, #00ffff);
+    opacity: 1;
+}
+
+/* Ensure AOS animations don't affect visibility */
+[data-aos] {
+    pointer-events: auto !important;
+}
+
+[data-aos].aos-animate {
+    pointer-events: auto !important;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 400px) {
+    .button-container {
+        grid-template-columns: 1fr; /* Stack buttons on very small screens */
+        max-width: 200px;
+    }
 }
 
 /* Ensure the button is visible */
@@ -590,14 +659,7 @@
 }
 
 /* Update button-container to handle three buttons */
-.button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px; /* Reduced gap for three buttons */
-        margin-top: 20px;
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    }
+
 
     /* Update existing button styles to be consistent */
     .rsvp-button, .btn-schedule {
@@ -781,10 +843,10 @@
     </div>
 
     <div class="button-container">         
-        <button class="btn-schedule" onclick="showSchedule()">📅 Lihat Susunan Acara</button>         
-        <a href="javascript:void(0);" class="rsvp-button" data-aos="zoom-in" onclick="showContactPerson()">👥 Contact Person</a>         
-        <a href="donasi.html" class="rsvp-button" data-aos="zoom-in">💝 Donasi</a>         
-        <a href="daftar peserta.html" class="rsvp-button" data-aos="zoom-in">📋 Daftar Peserta</a>     
+        <button class="uniform-button" onclick="showSchedule()">📅 Susunan Acara</button>         
+        <button class="uniform-button" onclick="showContactPerson()">👥 Contact Person</button>         
+        <button class="uniform-button" onclick="window.location.href='donasi.html'">💝 Donasi</button>         
+        <button class="uniform-button" onclick="window.location.href='daftar peserta.html'">📋 Daftar Peserta</button>     
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
