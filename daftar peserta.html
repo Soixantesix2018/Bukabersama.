@@ -118,18 +118,66 @@
     </style>
 </head>
 <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Peserta Reuni - Soixantesix 2018</title>
+    <style>
+        /* Previous styles remain the same */
+
+        .participant-number {
+            width: 30px;
+            color: #00ffff;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .participant-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .participant-details {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total-participants {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        /* Rest of the previous styles remain the same */
+    </style>
+</head>
+<body>
     <div class="container">
         <header>
             <h1>Daftar Peserta Reuni</h1>
             <p>Soixantesix 2018</p>
         </header>
 
+        <div class="total-participants" id="totalParticipants">
+            Total Peserta: 0 orang
+        </div>
+
         <div class="search-container">
             <input type="text" class="search-input" id="searchInput" placeholder="Cari nama peserta..." oninput="searchParticipants()">
         </div>
 
         <div class="participant-list" id="participantList">
-            <!-- Daftar peserta akan ditambahkan melalui JavaScript -->
+            <!-- Participants will be added via JavaScript -->
         </div>
 
         <div style="text-align: center;">
@@ -138,7 +186,7 @@
     </div>
 
     <script>
-        // Sample data - Dapat diganti dengan data sebenarnya
+        // Sample data remains the same
         const participants = [
             { name: "khairul azwan", class: "9-1" },
             { name: "Dina khoirunisa", class: "9-3" },
@@ -162,22 +210,28 @@
             { name: "faisal", class: "9-1" },
             { name: "Masya putri", class: "9-2" },
             { name: "Rangga Indra kusuma", class: "9-2" },
-            // Tambahkan peserta lainnya sesuai kebutuhan
         ];
 
         function displayParticipants(filteredParticipants = participants) {
             const participantList = document.getElementById('participantList');
+            const totalParticipantsDiv = document.getElementById('totalParticipants');
             participantList.innerHTML = '';
 
-            filteredParticipants.forEach(participant => {
+            filteredParticipants.forEach((participant, index) => {
                 const participantItem = document.createElement('div');
                 participantItem.className = 'participant-item';
                 participantItem.innerHTML = `
-                    <span class="participant-name">${participant.name}</span>
-                    <span class="participant-class">${participant.class}</span>
+                    <span class="participant-number">${index + 1}</span>
+                    <div class="participant-details">
+                        <span class="participant-name">${participant.name}</span>
+                        <span class="participant-class">${participant.class}</span>
+                    </div>
                 `;
                 participantList.appendChild(participantItem);
             });
+
+            // Update total participants count
+            totalParticipantsDiv.innerHTML = `Total Peserta: ${filteredParticipants.length} orang`;
         }
 
         function searchParticipants() {
