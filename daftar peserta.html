@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Peserta Reuni - Soixantesix 2018</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: black;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #00ffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .participant-list {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .participant-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .participant-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+
+        .participant-item:last-child {
+            border-bottom: none;
+        }
+
+        .participant-name {
+            color: #fff;
+            font-size: 1.1em;
+        }
+
+        .participant-class {
+            color: #00ffff;
+            font-size: 0.9em;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daftar Peserta Reuni</h1>
+            <p>Soixantesix 2018</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Cari nama peserta..." oninput="searchParticipants()">
+        </div>
+
+        <div class="participant-list" id="participantList">
+            <!-- Daftar peserta akan ditambahkan melalui JavaScript -->
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-button">← Kembali ke Halaman Utama</a>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - Dapat diganti dengan data sebenarnya
+        const participants = [
+            { name: "khairul azwan", class: "9-1" },
+            { name: "Dina khoirunisa", class: "9-3" },
+            { name: "Muhamad farid rivai", class: "9-3" },
+            { name: "Adelia nabila", class: "9-4" },
+            { name: "Salsabila puspita sari", class: "9-3" },
+            { name: "Zacky afandi", class: "9-2" },
+            { name: "Rika amelia", class: "9-4" },
+            { name: "Firlly surya rohmawan", class: "9-4" },
+            { name: "Danuarta", class: "9-3" },
+            { name: "Bisma saputra", class: "9-4" },
+            { name: "Fitria anisa", class: "9-3" },
+            { name: "Abi farhan maulana", class: "9-5" },
+            { name: "Ramadhan Putra Hidayat", class: "9-1" },
+            { name: "Bernice keysa", class: "9-2" },
+            { name: "Riana Putri", class: "9-4" },
+            { name: "Alfira", class: "9-2" },
+            { name: "Alifah Rangkuti", class: "9-1" },
+            { name: "Maisito diva", class: "9-1" },
+            { name: "Gilang", class: "9-5" },
+            { name: "faisal", class: "9-1" },
+            { name: "Masya putri", class: "9-2" },
+            { name: "Rangga Indra kusuma", class: "9-2" },
+            // Tambahkan peserta lainnya sesuai kebutuhan
+        ];
+
+        function displayParticipants(filteredParticipants = participants) {
+            const participantList = document.getElementById('participantList');
+            participantList.innerHTML = '';
+
+            filteredParticipants.forEach(participant => {
+                const participantItem = document.createElement('div');
+                participantItem.className = 'participant-item';
+                participantItem.innerHTML = `
+                    <span class="participant-name">${participant.name}</span>
+                    <span class="participant-class">${participant.class}</span>
+                `;
+                participantList.appendChild(participantItem);
+            });
+        }
+
+        function searchParticipants() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredParticipants = participants.filter(participant => 
+                participant.name.toLowerCase().includes(searchTerm) ||
+                participant.class.toLowerCase().includes(searchTerm)
+            );
+            displayParticipants(filteredParticipants);
+        }
+
+        // Initial display
+        displayParticipants();
+    </script>
+</body>
+</html>
