@@ -246,6 +246,88 @@
         align-items: center;
     }
 }
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 10px;
+        width: 100%;
+    }
+
+    header {
+        padding: 20px 10px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .back-button {
+        font-size: 12px;
+        padding: 8px 15px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .donation-table {
+        margin-top: 10px;
+        overflow-x: auto;
+    }
+
+    .donation-table table {
+        font-size: 12px;
+    }
+
+    .donation-table th,
+    .donation-table td {
+        padding: 8px;
+    }
+
+    .total-donations {
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .total-amount {
+        font-size: 1.2em;
+    }
+
+    .donate-now-btn,
+    .contact-btn {
+        width: 100%;
+        min-width: unset;
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .bank-info {
+        padding: 15px;
+    }
+
+    .bank-info h3 {
+        font-size: 16px;
+    }
+
+    .bank-info p {
+        font-size: 14px;
+    }
+
+    .bank-info p[style*="font-size: 24px"] {
+        font-size: 18px !important;
+    }
+
+    .copy-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
     </style>
 </head>
 <body>
@@ -273,10 +355,10 @@
                 <tbody>
                     <tr>
                         <td class="rank rank-1">1</td>
-                        <td>Firly Surya</td>
+                        <td>Firlly Surya</td>
                         <td>94</td>
-                        <td class="donation-amount">Rp.300.000</td>
-                        <td>28 Januari</td>
+                        <td class="donation-amount">Rp300.000</td>
+                        <td>1 Febuari</td>
                     </tr>
                     <tr>
                         <td class="rank rank-2">2</td>
@@ -313,7 +395,7 @@
         <!-- Ganti bagian ini -->
 <div class="total-donations">
     <p>Total Donasi Terkumpul:</p>
-    <span class="total-amount">Rp.300.000</span>
+    <span class="total-amount">-</span>
 </div>
 
 <!-- Hapus div class="action-buttons" dan taruh button langsung -->
