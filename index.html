@@ -1229,12 +1229,10 @@
 const music = document.getElementById('backgroundMusic');
 const musicBtn = document.getElementById('musicToggle');
 
-// Initialize music player when document is loaded
+// Initialize music player
 document.addEventListener('DOMContentLoaded', function() {
-    // Set initial time to 25 seconds and play
-    music.currentTime = 25;
-    
-    // Try to play the music
+    // Remove the delay by not setting currentTime
+    // Play music immediately
     const playPromise = music.play();
     
     if (playPromise !== undefined) {
