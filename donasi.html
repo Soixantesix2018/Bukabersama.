@@ -426,122 +426,103 @@
         height: 100vh;
     }
 }
-        /* Responsive styles for 375px screens */
-@media screen and (max-width: 375px) {
-    /* Header adjustments */
+  @media screen and (max-width: 375px) {
+    .container {
+        padding: 15px;
+        width: 100%;
+    }
+
     header {
-        padding: 30px 0;
-        margin-bottom: 20px;
+        padding: 25px 15px;
+        margin-bottom: 25px;
     }
 
     h1 {
         font-size: 1.8em;
-        margin-bottom: 10px;
-    }
-
-    h2 {
-        font-size: 1.4em;
-    }
-
-    /* Details section adjustments */
-    .details {
-        padding: 20px;
-        margin: 15px 0;
-    }
-
-    .details h2 {
-        font-size: 1.6em;
-        margin-bottom: 15px;
-    }
-
-    .details p {
-        font-size: 0.9em;
-        margin-bottom: 8px;
-    }
-
-    .details ul li {
-        font-size: 0.9em;
-        margin-bottom: 6px;
-    }
-
-    /* Button container adjustments */
-    .button-container {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 10px;
-        margin: 15px auto;
-    }
-
-    .uniform-button {
-        font-size: 0.9em;
-        height: 45px;
-        padding: 0 15px;
-    }
-
-    /* Modal adjustments */
-    .modal-content {
-        width: 90%;
-        max-width: 340px;
-        padding: 15px;
-    }
-
-    .modal-content h2 {
-        font-size: 1.4em;
-        margin-bottom: 15px;
-    }
-
-    .contact-button {
-        font-size: 0.9em;
-        padding: 8px 15px;
-    }
-
-    /* Schedule table adjustments */
-    .schedule-table th {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-
-    .schedule-table td {
-        padding: 10px;
-        font-size: 0.8em;
-    }
-
-    .schedule-table td:first-child {
-        width: 80px;
-    }
-
-    /* Contact list adjustments */
-    .contact-item {
         margin-bottom: 12px;
     }
 
-    .contact-item span {
-        font-size: 0.9em;
+    .back-button {
+        font-size: 13px;
+        padding: 8px 16px;
+        top: 12px;
+        left: 12px;
     }
 
-    /* Countdown adjustments */
-    .countdown {
-        gap: 8px;
+    .donation-table {
+        margin-top: 15px;
+        overflow-x: auto;
     }
 
-    .countdown-item {
-        width: 65px;
-        height: 65px;
-        padding: 8px;
+    .donation-table table {
+        font-size: 13px;
     }
 
-    .countdown-value {
-        font-size: 1.2em;
+    .donation-table th,
+    .donation-table td {
+        padding: 10px;
     }
 
-    .countdown-label {
-        font-size: 0.7em;
-        margin-top: 4px;
+    .donation-table th {
+        white-space: nowrap;
     }
 
-    /* Loading screen adjustments */
-    .loading-logo {
-        width: 300px;
+    .total-donations {
+        margin-top: 25px;
+        padding: 15px;
+    }
+
+    .total-amount {
+        font-size: 1.3em;
+    }
+
+    .donate-now-btn,
+    .contact-btn {
+        width: 100%;
+        min-width: unset;
+        padding: 12px 20px;
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        margin: 15px;
+    }
+
+    .bank-info {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .bank-info h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .bank-info p {
+        font-size: 14px;
+    }
+
+    .bank-info p[style*="font-size: 24px"] {
+        font-size: 20px !important;
+    }
+
+    .copy-button {
+        padding: 8px 15px;
+        font-size: 13px;
+        margin-top: 10px;
+    }
+
+    .close-modal {
+        top: 12px;
+        right: 12px;
+        font-size: 22px;
+    }
+
+    #particles-js {
+        height: 100vh;
     }
 }
     </style>
