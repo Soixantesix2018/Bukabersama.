@@ -899,10 +899,14 @@
             <i class="fas fa-music"></i>
             <span>Pause Music</span>
         </button>
-        <audio id="backgroundMusic" autoplay>
-            <source src="Opick" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+       <!-- Sesudah - Sesuaikan dengan struktur folder Anda -->
+<audio id="backgroundMusic" autoplay>
+    <source src="./assets/music/opick.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+        <audio id="backgroundMusic" autoplay muted>
+    <source src="./assets/music/opick.mp3" type="audio/mp3">
+</audio>
     </div>
     
     <!-- Particles.js container -->
@@ -1273,6 +1277,15 @@ music.addEventListener('ended', function() {
     musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Play Music</span>';
     musicBtn.querySelector('i').classList.remove('music-playing');
 });
+        document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('backgroundMusic');
+    music.muted = false;
+    music.play();
+});
+        document.addEventListener('click', function() {
+    const music = document.getElementById('backgroundMusic');
+    music.play();
+}, { once: true });
     </script>
 </body>
 </html>
