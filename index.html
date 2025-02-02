@@ -808,9 +808,103 @@
         font-size: 0.8em;
     }
 }
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-proposal-button {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 0 15px;
+}
+
+.centered-proposal-button .uniform-button {
+    width: 100%;
+    max-width: 240px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .centered-proposal-button .uniform-button {
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .centered-proposal-button .uniform-button {
+        max-width: 180px;
+    }
+}
+.music-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.music-toggle {
+    background: rgba(0, 255, 255, 0.2);
+    border: 2px solid #00ffff;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.music-toggle:hover {
+    background: rgba(0, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.music-toggle i {
+    font-size: 16px;
+}
+
+.music-toggle i.music-playing {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
     </style>
 </head>
 <body>
+    <div class="music-widget">
+        <button id="musicToggle" class="music-toggle">
+            <i class="fas fa-music"></i>
+            <span>Pause Music</span>
+        </button>
+        <audio id="backgroundMusic" autoplay>
+            <source src="Opick feat. Finalis F L O - Shollu Ala Muhammad  Official Video.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
     <!-- Particles.js container -->
     <div id="particles-js"></div>
 
@@ -853,7 +947,7 @@
            <div class="details" data-aos="fade-up">
     <h2>Detail Acara</h2>
     <p>🗓️ Minggu, 16 Maret 2025</p>
-    <p>⏰ 15:30 WIB - 20:30</p>
+    <p>⏰ 15:30 WIB - Selesai</p>
     <p>📍 SMPN 66 Jakarta</p>
     <p>👥 Seluruh Alumni Angkatan 2018</p>
     <p>💰 Htm 150.000</p>
@@ -989,7 +1083,10 @@
         <button class="uniform-button" onclick="showSchedule()">📅 Susunan Acara</button>         
         <button class="uniform-button" onclick="showContactPerson()">👥 Contact Person</button>         
         <button class="uniform-button" onclick="window.location.href='donasi.html'">💝 Donasi</button>         
-        <button class="uniform-button" onclick="window.location.href='daftar peserta.html'">📋 Daftar Peserta</button>     
+        <button class="uniform-button" onclick="window.location.href='daftar peserta.html'">📋 Daftar Peserta</button>
+    </div>
+    <div class="centered-proposal-button">
+        <button class="uniform-button" onclick="window.location.href='proposal.html'">📄 Proposal Kegiatan</button>     
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -1127,6 +1224,57 @@
         function closeContact() {
             document.getElementById('contactModal').style.display = 'none';
         }
+        
+        let isPlaying = true;
+const music = document.getElementById('backgroundMusic');
+const musicBtn = document.getElementById('musicToggle');
+
+// Initialize music player when document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Set initial time to 25 seconds and play
+    music.currentTime = 25;
+    
+    // Try to play the music
+    const playPromise = music.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Autoplay started successfully
+            isPlaying = true;
+            musicBtn.querySelector('i').classList.add('music-playing');
+        }).catch(error => {
+            // Autoplay was prevented
+            console.log("Autoplay prevented:", error);
+            isPlaying = false;
+            musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Play Music</span>';
+            musicBtn.querySelector('i').classList.remove('music-playing');
+        });
+    }
+});
+
+// Toggle music function
+function toggleMusic() {
+    if (isPlaying) {
+        music.pause();
+        musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Play Music</span>';
+        musicBtn.querySelector('i').classList.remove('music-playing');
+    } else {
+        music.play();
+        musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Pause Music</span>';
+        musicBtn.querySelector('i').classList.add('music-playing');
+    }
+    isPlaying = !isPlaying;
+}
+
+// Add click event listener to music toggle button
+musicBtn.addEventListener('click', toggleMusic);
+
+// Handle when music ends
+music.addEventListener('ended', function() {
+    isPlaying = false;
+    musicBtn.innerHTML = '<i class="fas fa-music"></i><span>Play Music</span>';
+    musicBtn.querySelector('i').classList.remove('music-playing');
+});
     </script>
 </body>
 </html>
