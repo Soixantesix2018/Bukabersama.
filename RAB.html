@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAB - Buka Puasa Bersama</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        :root {
+            --primary: #00fff2;
+            --secondary: #0a1128;
+            --background: #030014;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text: #ffffff;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--secondary), #000);
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header h1 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .category {
+            background: rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-title {
+            color: var(--primary);
+            font-size: 0.875rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-container {
+            width: 100%;
+            background: transparent;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.65rem;
+        }
+
+        th {
+            background: rgba(0, 255, 242, 0.1);
+            color: var(--primary);
+            text-align: left;
+            padding: 0.35rem;
+            font-weight: 500;
+        }
+
+        td {
+            padding: 0.35rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .item-name {
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.65rem;
+        }
+
+        .item-description {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.6rem;
+            display: block;
+        }
+
+        .subtotal-row {
+            background: rgba(0, 255, 242, 0.1);
+            font-weight: 500;
+        }
+
+        .subtotal-row td {
+            color: var(--primary);
+        }
+
+        .grand-total {
+            background: rgba(0, 255, 242, 0.1);
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .grand-total-title {
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .total-amount {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin: 0.25rem 0;
+        }
+
+        .terbilang {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        @media (max-width: 375px) {
+            table {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            th, td {
+                padding: 0.25rem;
+                font-size: 0.6rem;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: clip;
+            }
+
+            th:nth-child(1), td:nth-child(1) { width: 35%; }
+            th:nth-child(2), td:nth-child(2) { width: 12%; }
+            th:nth-child(3), td:nth-child(3) { width: 13%; }
+            th:nth-child(4), td:nth-child(4) { width: 20%; }
+            th:nth-child(5), td:nth-child(5) { width: 20%; }
+
+            .item-name, .item-description {
+                font-size: 0.6rem;
+                line-height: 1.2;
+                margin: 0;
+            }
+
+            .item-description {
+                font-size: 0.55rem;
+                opacity: 0.7;
+            }
+
+            td[data-label="Kuantitas"],
+            td[data-label="Satuan"],
+            td[data-label="Harga Satuan"],
+            td[data-label="Total"] {
+                text-align: right;
+            }
+
+            .table-container {
+                margin: 0;
+                padding: 0;
+                overflow-x: visible;
+            }
+
+            .category {
+                margin-bottom: 0.25rem;
+            }
+
+            .category-title {
+                padding: 0.35rem;
+            }
+
+            .table-container {
+                overflow-x: visible;
+                -webkit-overflow-scrolling: auto;
+            }
+
+            td {
+                word-break: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Rincian Anggaran Biaya (RAB)</h1>
+            <p>Buka Puasa Bersama Alumni SMPN 66 Jakarta</p>
+        </div>
+        <div id="budgetContent"></div>
+    </div>
+
+    <script>
+           const budgetData = {
+            categories: [
+                // Kategori sebelumnya tetap sama
+                {
+                    name: "Konsumsi",
+                    items:  [
+                        { name: "Nasi kotak", description: "Ayam Kambal", quantity: 150, unit: "Pack", price: 25000, total: 3750000 },
+                        { name: "Air mineral", description: "Cleo 330 ml", quantity: 6, unit: "Dus", price: 40000, total: 240000 },
+                        { name: "Snack box", description: "Risol Mayo,Lontong,Aqua Gelas,Kurma", quantity: 150, unit: "Pieces", price: 5000, total: 750000 },
+                        { name: "Gorengan", description: "Tempe,Risol,Bakwan", quantity: 150, unit: "Pcs", price: 1500, total: 225000 },
+                        { name: "Kue basah", description: "Kue tradisional basah aneka rasa", quantity: 100, unit: "Pcs", price: 31200, total: 312000 },
+                        { name: "Es buah", description: " ", quantity: 30, unit: "Liter", price: 290000, total: 290000 },
+                        { name: "Es teh manis", description: "", quantity: 30, unit: "Liter", price:60000, total: 60000 },
+                        { name: "Es batu", description: "kristal", quantity: 2, unit: "kg", price: 20000, total: 40000 },
+                        { name: "Pisang", description: "Pisang ambon", quantity: 5, unit: "Sisir", price: 25000, total: 125000 },
+                        { name: "Jeruk", description: "Jeruk medan", quantity: 3, unit: "Kg", price: 30000, total: 90000 },
+                        { name: "Salak", description: "Salak pondoh", quantity: 3, unit: "Kg", price: 20000, total: 60000 },
+                        { name: "Sambel kacang", description: "Sinti", quantity: 5, unit: "pcs", price: 5000, total: 25000 },
+                        { name: "Cabe", description: "Rawit", quantity: 1/4, unit: "kg", price: 10000, total: 10000 }
+                    ]
+                },
+                {
+                    name: "Perlengkapan",
+                    items: [
+                        { name: "Gelas paper 260ml", description: "50pcs", quantity: 3, unit: "Pack", price: 14500, total: 43500 },
+                        { name: "Paper try", description: "90pcs/pack", quantity: 2, unit: "Pack", price: 31000, total: 62000 },
+                        { name: "Sendok Plastik", description: "25/pack", quantity: 6, unit: "Pack", price: 1500, total: 15000 },
+                        { name: "Trash Bag", description: "90x120cm", quantity: 5, unit: "Pcs", price: 5700, total: 28500 },
+                        { name: "Banner", description: "8x2 meter", quantity: 1, unit: "Pcs", price: 20000, total: 320000 },
+                        { name: "Goodie Bag", description: "Tas souvenir", quantity: 50, unit: "Pcs", price: 2000, total: 100000 },
+                        { name: "Tenda", description: "8x8 meter", quantity: 1, unit: "Set", price: 3000000, total: 3000000 },
+                        { name: "Blower", description: "", quantity: 3, unit: "buah", price: 200000, total: 600000 }
+                    ]
+                },
+                {
+                    name: "Santunan Anak Yatim",
+                    items: [
+                        { name: "Santunan", description: "Santunan tunai untuk anak yatim", quantity: 20, unit: "Orang", price: 100000, total: 2000000 }
+                    ]
+                },
+                {
+                    name: "Bingkisan Guru & Orang Tua Almarhum",
+                    items: [
+                        { name: "Minyak", description: "Minyak goreng kemasan 2 liter", quantity: 30, unit: "Botol", price: 19500, total: 585000 },
+                        { name: "Sirup", description: "Sirup rasa buah premium 650ml", quantity: 30, unit: "Kaleng", price: 12000, total: 510000 },
+                        { name: "Gula", description: "Gula pasir kemasan 1kg", quantity: 30, unit: "Pack", price: 18500, total: 555000 },
+                        { name: "Biskuit", description: "Biskuit kaleng premium", quantity: 30, unit: "Kaleng", price: 35000, total: 1050000 },
+                        { name: "Teh", description: "Teh celup premium isi 50 sachet", quantity: 30, unit: "Pack", price: 10000, total: 300000 }
+                    ]
+                },
+                // Tambahan kategori baru
+                {
+                    name: "Bingkisan Anak Yatim",
+                    items:  [
+                        { name: "Minyak", description: "Minyak goreng 2 liter", quantity: 20, unit: "Botol", price: 19500, total: 390000 },
+                        { name: "Sirup", description: "marjan 650ml", quantity: 20, unit: "Kaleng", price: 12000, total: 240000 },
+                        { name: "Gula", description: "Gula pasir kemasan 1kg", quantity: 20, unit: "Pack", price: 18500, total: 370000 },
+                        { name: "Biskuit", description: "Biskuit kaleng", quantity: 20, unit: "Kaleng", price: 35000, total: 700000 },
+                        { name: "Teh", description: "", quantity: 20, unit: "Pack", price: 10000, total: 200000 }
+                    ]
+                },
+                {
+                    name: "Jasa",
+                    items: [
+                        { name: "Penceramah", description: "Ceramah Ramadan", quantity: 1, unit: "Orang", price: 300000, total: 300000 },
+                        { name: "Keamanan", description: "Parkiran Motor/Mobil", quantity: 2, unit: "Orang", price: 50000, total: 100000 },
+                        { name: "Kebersihan", description: "", quantity: 1, unit: "orang", price: 50000, total: 50000 }
+                    ]
+                },
+                {
+                    name: "Dana Tak Terduga",
+                    items: [
+                        { name: "Cadangan biaya", description: "Untuk keperluan mendadak", quantity: 1, unit: "Paket", price: 500000, total: 500000 }
+                    ]
+                },
+                {
+                    name: "Bingkisan Orang Tua Almarhum",
+                    items: [
+                        { name: "Sejadah", description: "", quantity: 2, unit: "Pcs", price: 0, total: 0 },
+                        { name: "Sarung", description: "", quantity: 2, unit: "Pcs", price: 0, total: 0 },
+                        { name: "Mukenah", description: "", quantity: 2, unit: "pcs", price: 100000, total: 200000 }
+                    ]
+                }
+            ]
+        };
+
+        // Fungsi-fungsi JavaScript tetap sama seperti sebelumnya
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function calculateTotal(items) {
+            return items.reduce((sum, item) => sum + item.total, 0);
+        }
+
+        function renderBudget() {
+            const container = document.getElementById('budgetContent');
+            let html = '';
+            let grandTotal = 0;
+
+            budgetData.categories.forEach(category => {
+                const categoryTotal = calculateTotal(category.items);
+                grandTotal += categoryTotal;
+
+                html += `
+                    <div class="category">
+                        <h2 class="category-title">${category.name}</h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ITEM</th>
+                                        <th>KUANTITAS</th>
+                                        <th>SATUAN</th>
+                                        <th>HARGA SATUAN</th>
+                                        <th>TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${category.items.map(item => `
+                                        <tr>
+                                            <td>
+                                                <span class="item-name">${item.name}</span>
+                                                <span class="item-description">${item.description}</span>
+                                            </td>
+                                            <td data-label="Kuantitas">${item.quantity}</td>
+                                            <td data-label="Satuan">${item.unit}</td>
+                                            <td data-label="Harga Satuan">${formatCurrency(item.price)}</td>
+                                            <td data-label="Total">${formatCurrency(item.total)}</td>
+                                        </tr>
+                                    `).join('')}
+                                    <tr class="subtotal-row">
+                                        <td colspan="4" style="text-align: right">Subtotal</td>
+                                        <td data-label="Subtotal">${formatCurrency(categoryTotal)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="grand-total">
+                    <div class="grand-total-title">Total Keseluruhan</div>
+                    <div class="total-amount">${formatCurrency(grandTotal)}</div>
+                    <p class="terbilang">Terbilang: ${grandTotal.toLocaleString('id-ID')} Rupiah</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderBudget);
+    </script>
+</body>
+</html>
