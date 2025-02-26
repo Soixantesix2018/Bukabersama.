@@ -14,13 +14,13 @@
         }
 
         body {
-    background: black;
-    color: white;
-    min-height: 100vh;
-    position: relative;
-    margin: 0;
-    padding: 0;
-}
+            background: black;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
 
         #particles-js {
             position: fixed;
@@ -32,13 +32,13 @@
         }
 
         .container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    z-index: 2;
-    min-height: calc(100vh - 100px); /* Pastikan container cukup tinggi */
-}
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            z-index: 2;
+            min-height: calc(100vh - 100px);
+        }
 
         header {
             text-align: center;
@@ -87,18 +87,51 @@
         .donation-table table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed; /* Menambahkan fixed layout */
         }
 
         .donation-table th {
             background: rgba(0, 255, 255, 0.2);
             color: white;
-            padding: 15px;
+            padding: 12px 8px; /* Mengurangi padding */
             text-align: left;
         }
 
         .donation-table td {
-            padding: 15px;
+            padding: 12px 8px; /* Mengurangi padding */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: normal; /* Izinkan text wrapping */
+            word-break: break-word; /* Memecah kata yang terlalu panjang */
+        }
+
+        /* Mengatur lebar kolom secara spesifik */
+        .donation-table th:nth-child(1), 
+        .donation-table td:nth-child(1) {
+            width: 10%;
+            text-align: center;
+        }
+
+        .donation-table th:nth-child(2), 
+        .donation-table td:nth-child(2) {
+            width: 30%;
+        }
+
+        .donation-table th:nth-child(3), 
+        .donation-table td:nth-child(3) {
+            width: 15%;
+            text-align: center;
+        }
+
+        .donation-table th:nth-child(4), 
+        .donation-table td:nth-child(4) {
+            width: 25%;
+            text-align: right;
+        }
+
+        .donation-table th:nth-child(5), 
+        .donation-table td:nth-child(5) {
+            width: 20%;
+            text-align: center;
         }
 
         .donation-table tr:hover {
@@ -134,42 +167,40 @@
         .rank-2 { color: silver; }
         .rank-3 { color: #cd7f32; }
 
-       
-  
-
-.donate-now-btn, .contact-btn {
-    padding: 15px 30px;
-    background: linear-gradient(45deg, #00ffff, #0088ff);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-    transition: all 0.3s ease;
-    display: inline-flex; /* Ubah ke inline-flex */
-    align-items: center;
-    gap: 8px;
-    min-width: 200px;
-    justify-content: center;
-    margin: 10px;  /* Tambah margin */
-    position: sticky; /* Tambah sticky positioning */
-    bottom: 20px;
-}
+        .donate-now-btn, .contact-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 200px;
+            justify-content: center;
+            margin: 10px;
+            position: sticky;
+            bottom: 20px;
+        }
 
         .donate-now-btn:hover, .contact-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
         }
 
-    .buttons-container {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 20px;
-        border-radius: 15px;
-        margin-top: 30px;
-        backdrop-filter: blur(10px);
-    }
+        .buttons-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -236,295 +267,214 @@
         }
 
         @media (max-width: 768px) {
-    .donate-now-btn,
-    .contact-btn {
-        width: 90%;
-        padding: 12px 25px;
-        font-size: 14px;
-        display: block; /* Ubah ke block untuk mobile */
-        margin: 10px auto; /* Center button di mobile */
-        align-items: center;
-    }
-}
-@media screen and (max-width: 320px) {
-    .container {
-        padding: 10px;
-        width: 100%;
-    }
+            .donate-now-btn,
+            .contact-btn {
+                width: 90%;
+                padding: 12px 25px;
+                font-size: 14px;
+                display: block;
+                margin: 10px auto;
+                align-items: center;
+            }
+            
+            /* Penyesuaian tabel untuk layar kecil */
+            .donation-table th,
+            .donation-table td {
+                padding: 10px 5px;
+                font-size: 14px;
+            }
+            
+            /* Ukuran font untuk nominal */
+            .donation-amount {
+                font-size: 13px;
+            }
+        }
 
-    header {
-        padding: 20px 10px;
-        margin-bottom: 20px;
-    }
+        @media screen and (max-width: 375px) {
+            .container {
+                padding: 15px;
+                width: 100%;
+            }
 
-    h1 {
-        font-size: 1.8em;
-        margin-bottom: 10px;
-    }
+            header {
+                padding: 25px 15px;
+                margin-bottom: 25px;
+            }
 
-    .back-button {
-        font-size: 12px;
-        padding: 8px 15px;
-        top: 10px;
-        left: 10px;
-    }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 12px;
+            }
 
-    .donation-table {
-        margin-top: 10px;
-        overflow-x: auto;
-    }
+            .back-button {
+                font-size: 13px;
+                padding: 8px 16px;
+                top: 12px;
+                left: 12px;
+            }
 
-    .donation-table table {
-        font-size: 12px;
-    }
+            .donation-table {
+                margin-top: 15px;
+            }
 
-    .donation-table th,
-    .donation-table td {
-        padding: 8px;
-    }
+            .donation-table table {
+                font-size: 13px;
+            }
 
-    .total-donations {
-        margin-top: 20px;
-        padding: 15px;
-    }
+            .donation-table th,
+            .donation-table td {
+                padding: 8px 4px;
+                font-size: 12px;
+            }
 
-    .total-amount {
-        font-size: 1.2em;
-    }
+            .donation-table th {
+                white-space: normal;
+            }
+            
+            /* Mengatur ulang lebar kolom untuk mobile */
+            .donation-table th:nth-child(1), 
+            .donation-table td:nth-child(1) {
+                width: 8%;
+            }
 
-    .donate-now-btn,
-    .contact-btn {
-        width: 100%;
-        min-width: unset;
-        padding: 10px 20px;
-        font-size: 14px;
-        margin: 5px 0;
-    }
+            .donation-table th:nth-child(2), 
+            .donation-table td:nth-child(2) {
+                width: 25%;
+            }
 
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-        margin: 10px;
-    }
+            .donation-table th:nth-child(3), 
+            .donation-table td:nth-child(3) {
+                width: 12%;
+            }
 
-    .bank-info {
-        padding: 15px;
-    }
+            .donation-table th:nth-child(4), 
+            .donation-table td:nth-child(4) {
+                width: 30%;
+            }
 
-    .bank-info h3 {
-        font-size: 16px;
-    }
+            .donation-table th:nth-child(5), 
+            .donation-table td:nth-child(5) {
+                width: 25%;
+            }
+            
+            .donation-amount {
+                font-size: 12px;
+            }
 
-    .bank-info p {
-        font-size: 14px;
-    }
+            .total-donations {
+                margin-top: 25px;
+                padding: 15px;
+            }
 
-    .bank-info p[style*="font-size: 24px"] {
-        font-size: 18px !important;
-    }
+            .total-amount {
+                font-size: 1.3em;
+            }
 
-    .copy-button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-}
+            .donate-now-btn,
+            .contact-btn {
+                width: 100%;
+                min-width: unset;
+                padding: 12px 20px;
+                font-size: 14px;
+                margin: 8px 0;
+            }
+
+            #particles-js {
+                height: 100vh;
+            }
+        }
+
         @media screen and (max-width: 320px) {
-    .container {
-        padding: 10px;
-        width: 100%;
-    }
+            .container {
+                padding: 10px;
+                width: 100%;
+            }
 
-    header {
-        padding: 20px 10px;
-        margin-bottom: 20px;
-    }
+            header {
+                padding: 20px 10px;
+                margin-bottom: 20px;
+            }
 
-    h1 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
 
-    .back-button {
-        font-size: 12px;
-        padding: 8px 15px;
-        top: 10px;
-        left: 10px;
-    }
+            .back-button {
+                font-size: 12px;
+                padding: 8px 15px;
+                top: 10px;
+                left: 10px;
+            }
 
-    .donation-table {
-        margin-top: 10px;
-        font-size: 11px;
-    }
+            .donation-table {
+                margin-top: 10px;
+            }
 
-    .donation-table table {
-        width: 100%;
-    }
+            .donation-table table {
+                width: 100%;
+                font-size: 11px;
+            }
 
-    .donation-table th,
-    .donation-table td {
-        padding: 6px;
-        font-size: 11px;
-    }
+            .donation-table th,
+            .donation-table td {
+                padding: 6px 3px;
+                font-size: 10px;
+            }
+            
+            /* Mengatur ulang lebar kolom untuk mobile sangat kecil */
+            .donation-table th:nth-child(1), 
+            .donation-table td:nth-child(1) {
+                width: 8%;
+            }
 
-    .total-donations {
-        margin-top: 15px;
-        padding: 12px;
-    }
+            .donation-table th:nth-child(2), 
+            .donation-table td:nth-child(2) {
+                width: 22%;
+            }
 
-    .total-amount {
-        font-size: 1.1em;
-    }
+            .donation-table th:nth-child(3), 
+            .donation-table td:nth-child(3) {
+                width: 10%;
+            }
 
-    .donate-now-btn,
-    .contact-btn {
-        width: calc(100% - 20px);
-        min-width: unset;
-        padding: 8px 15px;
-        font-size: 12px;
-        margin: 5px 10px;
-        white-space: nowrap;
-    }
+            .donation-table th:nth-child(4), 
+            .donation-table td:nth-child(4) {
+                width: 35%;
+            }
 
-    .modal-content {
-        width: 95%;
-        padding: 15px;
-        margin: 8px;
-    }
+            .donation-table th:nth-child(5), 
+            .donation-table td:nth-child(5) {
+                width: 25%;
+            }
+            
+            .donation-amount {
+                font-size: 10px;
+            }
 
-    .bank-info {
-        padding: 12px;
-        margin: 15px 0;
-    }
+            .total-donations {
+                margin-top: 15px;
+                padding: 12px;
+            }
 
-    .bank-info h3 {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
+            .total-amount {
+                font-size: 1.1em;
+            }
 
-    .bank-info p {
-        font-size: 12px;
-    }
+            .donate-now-btn,
+            .contact-btn {
+                width: calc(100% - 20px);
+                min-width: unset;
+                padding: 8px 15px;
+                font-size: 12px;
+                margin: 5px 10px;
+                white-space: nowrap;
+            }
 
-    .bank-info p[style*="font-size: 24px"] {
-        font-size: 16px !important;
-    }
-
-    .copy-button {
-        padding: 6px 10px;
-        font-size: 11px;
-        margin-top: 8px;
-    }
-
-    .close-modal {
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-    }
-
-    /* Penyesuaian untuk particles */
-    #particles-js {
-        height: 100vh;
-    }
-}
-  @media screen and (max-width: 375px) {
-    .container {
-        padding: 15px;
-        width: 100%;
-    }
-
-    header {
-        padding: 25px 15px;
-        margin-bottom: 25px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-        margin-bottom: 12px;
-    }
-
-    .back-button {
-        font-size: 13px;
-        padding: 8px 16px;
-        top: 12px;
-        left: 12px;
-    }
-
-    .donation-table {
-        margin-top: 15px;
-        overflow-x: auto;
-    }
-
-    .donation-table table {
-        font-size: 13px;
-    }
-
-    .donation-table th,
-    .donation-table td {
-        padding: 10px;
-    }
-
-    .donation-table th {
-        white-space: nowrap;
-    }
-
-    .total-donations {
-        margin-top: 25px;
-        padding: 15px;
-    }
-
-    .total-amount {
-        font-size: 1.3em;
-    }
-
-    .donate-now-btn,
-    .contact-btn {
-        width: 100%;
-        min-width: unset;
-        padding: 12px 20px;
-        font-size: 14px;
-        margin: 8px 0;
-    }
-
-    .modal-content {
-        width: 90%;
-        padding: 20px;
-        margin: 15px;
-    }
-
-    .bank-info {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .bank-info h3 {
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-
-    .bank-info p {
-        font-size: 14px;
-    }
-
-    .bank-info p[style*="font-size: 24px"] {
-        font-size: 20px !important;
-    }
-
-    .copy-button {
-        padding: 8px 15px;
-        font-size: 13px;
-        margin-top: 10px;
-    }
-
-    .close-modal {
-        top: 12px;
-        right: 12px;
-        font-size: 22px;
-    }
-
-    #particles-js {
-        height: 100vh;
-    }
-}
+            #particles-js {
+                height: 100vh;
+            }
+        }
     </style>
 </head>
 <body>
@@ -592,7 +542,7 @@
                         <td class="donation-amount">Rp.50.000</td>
                         <td>7 Febuari</td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td class="rank">7</td>
                         <td>Arini Julia.P</td>
                         <td>93</td>
@@ -603,19 +553,17 @@
             </table>
         </div>
 
-        <!-- Ganti bagian ini -->
-<div class="total-donations">
-    <p>Total Donasi Terkumpul:</p>
-    <span class="total-amount">Rp.2.800.000</span>
-</div>
+        <div class="total-donations">
+            <p>Total Donasi Terkumpul:</p>
+            <span class="total-amount">Rp.2.800.000</span>
+        </div>
 
-<!-- Hapus div class="action-buttons" dan taruh button langsung -->
-<button class="contact-btn" onclick="contactTreasurer()">
-    💬 Hubungi Bendahara
-</button>
-<button class="donate-now-btn" onclick="showDonationModal()">
-    💝 Ikut Mendonasi
-</button>
+        <button class="contact-btn" onclick="contactTreasurer()">
+            💬 Hubungi Bendahara
+        </button>
+        <button class="donate-now-btn" onclick="showDonationModal()">
+            💝 Ikut Mendonasi
+        </button>
     </div>
 </div>
 
