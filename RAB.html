@@ -135,6 +135,44 @@ td {
     font-style: italic;
 }
 
+input.editable {
+    background: rgba(0, 255, 242, 0.05);
+    border: 1px solid rgba(0, 255, 242, 0.3);
+    color: #fff;
+    border-radius: 3px;
+    width: 100%;
+    padding: 0.25rem;
+    font-size: 0.65rem;
+    text-align: right;
+}
+
+input.editable:focus {
+    background: rgba(0, 255, 242, 0.1);
+    border-color: var(--primary);
+    outline: none;
+}
+
+.back-button {
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 255, 242, 0.2);
+    color: var(--primary);
+    border: 1px solid rgba(0, 255, 242, 0.5);
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 0.8rem;
+    backdrop-filter: blur(5px);
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(0, 255, 242, 0.3);
+}
+
         @media (max-width: 375px) {
             table {
                 display: table;
@@ -197,26 +235,6 @@ td {
                 word-break: break-word;
             }
         }
-        .back-button {
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 255, 242, 0.2);
-    color: var(--primary);
-    border: 1px solid rgba(0, 255, 242, 0.5);
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 1000;
-    font-size: 0.8rem;
-    backdrop-filter: blur(5px);
-    transition: background 0.3s ease;
-}
-
-.back-button:hover {
-    background: rgba(0, 255, 242, 0.3);
-}
         
 @media screen and (max-width: 320px) {
     .container {
@@ -405,12 +423,31 @@ td {
             return items.reduce((sum, item) => sum + item.total, 0);
         }
 
+        // Fungsi untuk memperbarui total saat input berubah
+        function updateTotal(categoryIndex, itemIndex, field, value) {
+            // Mengambil item yang akan diperbarui
+            const item = budgetData.categories[categoryIndex].items[itemIndex];
+            
+            // Memperbarui nilai
+            if (field === 'quantity') {
+                item.quantity = parseFloat(value) || 0;
+            } else if (field === 'price') {
+                item.price = parseFloat(value) || 0;
+            }
+            
+            // Menghitung total baru
+            item.total = item.quantity * item.price;
+            
+            // Render ulang seluruh anggaran untuk memperbarui tampilan
+            renderBudget();
+        }
+
         function renderBudget() {
             const container = document.getElementById('budgetContent');
             let html = '';
             let grandTotal = 0;
 
-            budgetData.categories.forEach(category => {
+            budgetData.categories.forEach((category, categoryIndex) => {
                 const categoryTotal = calculateTotal(category.items);
                 grandTotal += categoryTotal;
 
@@ -429,15 +466,23 @@ td {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${category.items.map(item => `
+                                    ${category.items.map((item, itemIndex) => `
                                         <tr>
                                             <td>
                                                 <span class="item-name">${item.name}</span>
                                                 <span class="item-description">${item.description}</span>
                                             </td>
-                                            <td data-label="Kuantitas">${item.quantity}</td>
+                                            <td data-label="Kuantitas">
+                                                <input type="number" class="editable" value="${item.quantity}" 
+                                                    onchange="updateTotal(${categoryIndex}, ${itemIndex}, 'quantity', this.value)" 
+                                                    min="0" step="any">
+                                            </td>
                                             <td data-label="Satuan">${item.unit}</td>
-                                            <td data-label="Harga Satuan">${formatCurrency(item.price)}</td>
+                                            <td data-label="Harga Satuan">
+                                                <input type="number" class="editable" value="${item.price}" 
+                                                    onchange="updateTotal(${categoryIndex}, ${itemIndex}, 'price', this.value)" 
+                                                    min="0">
+                                            </td>
                                             <td data-label="Total">${formatCurrency(item.total)}</td>
                                         </tr>
                                     `).join('')}
